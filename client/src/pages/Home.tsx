@@ -20,10 +20,10 @@ interface LocationData {
 }
 
 const DEFAULT_LOCATION = {
-  name: 'New York',
-  lat: 40.7128,
-  lon: -74.0060,
-  country: 'US'
+  name: 'Tagbilaran City',
+  lat: 9.6500,
+  lon: 123.8500,
+  country: 'PH'
 };
 
 const Home = () => {

@@ -54,10 +54,10 @@ export function useWeather() {
             setLocation(recentLocations[0]);
           } else {
             setLocation({
-              name: 'New York',
-              lat: 40.7128,
-              lon: -74.0060,
-              country: 'US'
+              name: 'Tagbilaran City',
+              lat: 9.6500,
+              lon: 123.8500,
+              country: 'PH'
             });
           }
         }
@@ -66,10 +66,10 @@ export function useWeather() {
       console.error('Geolocation not supported');
       // Use default location
       setLocation({
-        name: 'New York',
-        lat: 40.7128,
-        lon: -74.0060,
-        country: 'US'
+        name: 'Tagbilaran City',
+        lat: 9.6500,
+        lon: 123.8500,
+        country: 'PH'
       });
     }
   }, []);
