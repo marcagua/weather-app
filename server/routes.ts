@@ -527,28 +527,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
     
     const recentEvents = [
       {
-        type: 'Typhoon',
-        name: 'Typhoon Marilyn',
-        date: 'August 15, 2025',
-        description: 'Super typhoon with sustained winds of 195 km/h struck Eastern Visayas, causing widespread devastation and displacing over 120,000 residents.'
-      },
-      {
-        type: 'Flood',
-        name: 'Central Luzon Flooding',
-        date: 'July 10, 2025',
-        description: 'Record-breaking monsoon rains caused severe flooding in Pampanga, Bulacan, and Nueva Ecija, submerging agricultural lands and urban areas.'
-      },
-      {
-        type: 'Earthquake',
-        name: 'Mindanao Magnitude 6.7 Earthquake',
-        date: 'May 23, 2025',
-        description: 'Strong earthquake centered near Davao caused significant structural damage and triggered landslides in mountainous regions.'
-      },
-      {
         type: 'Volcanic',
         name: 'Mayon Volcano Eruption',
         date: 'March 8, 2025',
         description: 'Significant eruption with pyroclastic flows reaching 5km from the crater, prompting evacuation of nearby communities in Albay province.'
+      },
+      {
+        type: 'Earthquake',
+        name: 'Surigao Magnitude 5.9 Earthquake',
+        date: 'March 2, 2025',
+        description: 'Moderate earthquake affected eastern Mindanao, causing minor damage to structures and temporary power outages in coastal towns.'
+      },
+      {
+        type: 'Flood',
+        name: 'Eastern Visayas Flash Flooding',
+        date: 'February 28, 2025',
+        description: 'Unexpected heavy rainfall caused flash floods in Leyte and Samar provinces, affecting over 2,000 families in low-lying areas.'
+      },
+      {
+        type: 'Typhoon',
+        name: 'Tropical Storm Aghon',
+        date: 'February 15, 2025',
+        description: 'Early-season tropical storm brought strong winds and moderate rainfall to Mindanao, with minimal damage reported in coastal areas.'
       }
     ];
     
