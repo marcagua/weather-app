@@ -37,19 +37,24 @@ export function TabContent({
         {isLoading ? (
           <WeatherLoadingSkeleton />
         ) : !weather ? (
-          <div className="p-6 text-center">
-            <div className="mb-4 flex justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="p-4 text-center">
+            <div className="mb-3 flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
             </div>
-            <h3 className="text-lg font-medium text-gray-900">Weather Data Unavailable</h3>
+            <h3 className="text-base font-medium text-gray-900">Weather Data Unavailable</h3>
             <p className="mt-2 text-sm text-gray-600">
-              We're having trouble accessing weather data. This could be due to a new API key that is still activating (can take up to 2 hours) or connectivity issues.
+              We're having trouble accessing weather data. This could be due to API activation delay (up to 2 hours) or connectivity issues.
             </p>
-            <p className="mt-4 text-sm text-gray-600">
-              In the meantime, you can explore our Philippines news feed in the Hazards tab or check out the References section for valuable weather resources.
-            </p>
+            <div className="mt-3 flex flex-col gap-2">
+              <a href="#hazards" className="text-sm px-3 py-2 bg-blue-50 text-blue-700 rounded-lg font-medium">
+                📰 View Philippines News →
+              </a>
+              <a href="#references" className="text-sm px-3 py-2 bg-blue-50 text-blue-700 rounded-lg font-medium">
+                📚 Check Weather Resources →
+              </a>
+            </div>
           </div>
         ) : (
           <>
@@ -69,13 +74,18 @@ export function TabContent({
             {alerts && alerts.length > 0 ? (
               <WeatherAlerts alerts={alerts} />
             ) : (
-              <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 mb-6">
-                <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-amber-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <p className="text-sm font-medium text-amber-800">
-                    Weather alerts unavailable. This feature requires access to the OneCall API endpoint.
+              <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 mb-5">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                  <div className="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-amber-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p className="text-sm font-medium text-amber-800">
+                      Weather alerts unavailable
+                    </p>
+                  </div>
+                  <p className="text-xs text-amber-700 ml-7 sm:ml-2">
+                    This premium feature requires OneCall API access.
                   </p>
                 </div>
               </div>
@@ -92,19 +102,24 @@ export function TabContent({
         {isLoading ? (
           <TrendsLoadingSkeleton />
         ) : !weather ? (
-          <div className="p-6 text-center">
-            <div className="mb-4 flex justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="p-4 text-center">
+            <div className="mb-3 flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
             </div>
-            <h3 className="text-lg font-medium text-gray-900">Weather Trend Data Unavailable</h3>
+            <h3 className="text-base font-medium text-gray-900">Historical Data Unavailable</h3>
             <p className="mt-2 text-sm text-gray-600">
-              We're having trouble accessing historical weather data. This could be due to API activation delays (up to 2 hours) or connectivity issues.
+              We're having trouble accessing historical weather data. This could be due to API activation delays.
             </p>
-            <p className="mt-4 text-sm text-gray-600">
-              Please check back later. In the meantime, you can explore our Philippines news feed in the Hazards tab.
-            </p>
+            <div className="mt-3 flex flex-col gap-2">
+              <a href="#hazards" className="text-sm px-3 py-2 bg-blue-50 text-blue-700 rounded-lg font-medium">
+                📰 View Philippines News →
+              </a>
+              <a href="#references" className="text-sm px-3 py-2 bg-blue-50 text-blue-700 rounded-lg font-medium">
+                🌧️ Check Weather Resources →
+              </a>
+            </div>
           </div>
         ) : (
           <>

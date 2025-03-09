@@ -12,6 +12,9 @@ interface SafetyTipsProps {
 }
 
 const SafetyTips = ({ alerts = [] }: SafetyTipsProps) => {
+  // Set smaller icon sizes for mobile
+  const iconSize = "h-4 w-4 sm:h-5 sm:w-5";
+  const iconSizeSmall = "h-3 w-3 sm:h-4 sm:w-4";
   // Determine which safety tips to show based on active alerts
   const alertTypes = alerts.map(alert => alert.event.toLowerCase());
   
@@ -55,17 +58,17 @@ const SafetyTips = ({ alerts = [] }: SafetyTipsProps) => {
 
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-4">Safety Recommendations</h2>
+      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Safety Recommendations</h2>
       <div className="space-y-4">
         {showThunderstormTips && (
           <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-medium text-lg flex items-center">
-              <Zap className="h-5 w-5 text-yellow-500 mr-2" />
+            <h3 className="font-medium text-base sm:text-lg flex items-center">
+              <Zap className={`${iconSize} text-yellow-500 mr-2`} />
               Thunderstorm Safety
             </h3>
-            <ul className="mt-2 space-y-2 text-gray-700">
+            <ul className="mt-2 space-y-2 text-sm sm:text-base text-gray-700">
               <li className="flex items-start">
-                <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
+                <CheckCircle className={`${iconSizeSmall} text-green-500 mt-1 mr-2`} />
                 <span>Seek shelter indoors, away from windows</span>
               </li>
               <li className="flex items-start">
@@ -194,25 +197,25 @@ const SafetyTips = ({ alerts = [] }: SafetyTipsProps) => {
         
         {showGeneral && (
           <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-medium text-lg flex items-center">
-              <AlertTriangle className="h-5 w-5 text-blue-500 mr-2" />
+            <h3 className="font-medium text-base sm:text-lg flex items-center">
+              <AlertTriangle className={`${iconSize} text-blue-500 mr-2`} />
               Philippines Weather Safety
             </h3>
-            <ul className="mt-2 space-y-2 text-gray-700">
+            <ul className="mt-2 space-y-2 text-sm sm:text-base text-gray-700">
               <li className="flex items-start">
-                <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
+                <CheckCircle className={`${iconSizeSmall} text-green-500 mt-1 mr-2`} />
                 <span>During typhoon season (June-December), monitor PAGASA updates regularly</span>
               </li>
               <li className="flex items-start">
-                <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
+                <CheckCircle className={`${iconSizeSmall} text-green-500 mt-1 mr-2`} />
                 <span>For earthquake safety, practice "Duck, Cover, and Hold" and identify safe spots in your home</span>
               </li>
               <li className="flex items-start">
-                <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
+                <CheckCircle className={`${iconSizeSmall} text-green-500 mt-1 mr-2`} />
                 <span>During monsoon season, avoid low-lying areas prone to flooding</span>
               </li>
               <li className="flex items-start">
-                <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
+                <CheckCircle className={`${iconSizeSmall} text-green-500 mt-1 mr-2`} />
                 <span>Keep emergency numbers saved: Philippines Emergency Hotline (911) and Red Cross (143)</span>
               </li>
             </ul>
@@ -220,25 +223,25 @@ const SafetyTips = ({ alerts = [] }: SafetyTipsProps) => {
         )}
         
         <div className="p-4 bg-gray-50 rounded-lg">
-          <h3 className="font-medium text-lg flex items-center">
-            <Cloud className="h-5 w-5 text-gray-500 mr-2" />
+          <h3 className="font-medium text-base sm:text-lg flex items-center">
+            <Cloud className={`${iconSize} text-gray-500 mr-2`} />
             Philippines Emergency Preparedness
           </h3>
-          <ul className="mt-2 space-y-2 text-gray-700">
+          <ul className="mt-2 space-y-2 text-sm sm:text-base text-gray-700">
             <li className="flex items-start">
-              <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
+              <CheckCircle className={`${iconSizeSmall} text-green-500 mt-1 mr-2`} />
               <span>Prepare a "Go Bag" with essential documents, medication, water, and non-perishable food</span>
             </li>
             <li className="flex items-start">
-              <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
+              <CheckCircle className={`${iconSizeSmall} text-green-500 mt-1 mr-2`} />
               <span>Know your barangay's evacuation centers and emergency procedures</span>
             </li>
             <li className="flex items-start">
-              <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
+              <CheckCircle className={`${iconSizeSmall} text-green-500 mt-1 mr-2`} />
               <span>Follow the PAGASA color-coded rainfall advisory system (Yellow, Orange, Red)</span>
             </li>
             <li className="flex items-start">
-              <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
+              <CheckCircle className={`${iconSizeSmall} text-green-500 mt-1 mr-2`} />
               <span>Store important contacts and subscribe to NDRRMC disaster alerts (text SUBSCRIBE [LOCATION] to 8888)</span>
             </li>
           </ul>
