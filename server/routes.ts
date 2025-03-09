@@ -434,6 +434,136 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Get reference information for weather data sources in the Philippines
+  // Get monthly hazard trends data
+  router.get("/monthly-hazard-trends", (_req: Request, res: Response) => {
+    // In a real app, this data would come from multiple sources and be aggregated
+    // For now, we'll return sample data
+    const monthlyTrendsData = [
+      {
+        month: 'Jan',
+        typhoon: 10,
+        flood: 20,
+        earthquake: 15,
+        volcanic: 5
+      },
+      {
+        month: 'Feb',
+        typhoon: 15,
+        flood: 25,
+        earthquake: 10,
+        volcanic: 8
+      },
+      {
+        month: 'Mar',
+        typhoon: 20,
+        flood: 30,
+        earthquake: 12,
+        volcanic: 10
+      },
+      {
+        month: 'Apr',
+        typhoon: 25,
+        flood: 40,
+        earthquake: 8,
+        volcanic: 15
+      },
+      {
+        month: 'May',
+        typhoon: 40,
+        flood: 45,
+        earthquake: 10,
+        volcanic: 20
+      },
+      {
+        month: 'Jun',
+        typhoon: 50,
+        flood: 60,
+        earthquake: 12,
+        volcanic: 15
+      },
+      {
+        month: 'Jul',
+        typhoon: 60,
+        flood: 70,
+        earthquake: 15,
+        volcanic: 10
+      },
+      {
+        month: 'Aug',
+        typhoon: 70,
+        flood: 65,
+        earthquake: 18,
+        volcanic: 8
+      },
+      {
+        month: 'Sep',
+        typhoon: 65,
+        flood: 55,
+        earthquake: 22,
+        volcanic: 12
+      },
+      {
+        month: 'Oct',
+        typhoon: 50,
+        flood: 45,
+        earthquake: 16,
+        volcanic: 15
+      },
+      {
+        month: 'Nov',
+        typhoon: 35,
+        flood: 30,
+        earthquake: 12,
+        volcanic: 10
+      },
+      {
+        month: 'Dec',
+        typhoon: 25,
+        flood: 35,
+        earthquake: 10,
+        volcanic: 5
+      }
+    ];
+    
+    const recentEvents = [
+      {
+        type: 'Typhoon',
+        name: 'Typhoon Carina',
+        date: 'July 24, 2023',
+        description: 'Enhanced the southwest monsoon, causing heavy rainfall and flooding in Metro Manila and nearby provinces.'
+      },
+      {
+        type: 'Flood',
+        name: 'Cagayan Valley Flooding',
+        date: 'June 15, 2023',
+        description: 'Heavy monsoon rains caused significant flooding in Cagayan Valley, affecting thousands of residents.'
+      },
+      {
+        type: 'Earthquake',
+        name: 'Abra Earthquake',
+        date: 'May 5, 2023',
+        description: 'A magnitude 5.8 earthquake struck Abra province, causing minor damage to infrastructure.'
+      },
+      {
+        type: 'Volcanic',
+        name: 'Taal Volcano Activity',
+        date: 'April 12, 2023',
+        description: 'Taal Volcano showed increased activity with slight inflation and elevated sulfur dioxide emissions.'
+      }
+    ];
+    
+    res.json({
+      trends: monthlyTrendsData,
+      recentEvents: recentEvents,
+      sources: [
+        'PAGASA (Philippine Atmospheric, Geophysical and Astronomical Services Administration)',
+        'PHIVOLCS (Philippine Institute of Volcanology and Seismology)',
+        'NDRRMC (National Disaster Risk Reduction and Management Council)',
+        'Historical weather data compilations'
+      ]
+    });
+  });
+
   router.get("/references", (_req: Request, res: Response) => {
     const references = {
       weatherDataSources: [

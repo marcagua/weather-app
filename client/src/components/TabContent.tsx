@@ -7,6 +7,7 @@ import WeatherAlerts from './Hazards/WeatherAlerts';
 import HazardRiskGraph from './Hazards/HazardRiskGraph';
 import SafetyTips from './Hazards/SafetyTips';
 import PhilippinesNews from './Hazards/PhilippinesNews';
+import MonthlyHazardTrends from './Hazards/MonthlyHazardTrends';
 import WeatherApiTrend from './Trends/WeatherApiTrend';
 import TemperatureTrend from './Trends/TemperatureTrend';
 import PrecipitationHistory from './Trends/PrecipitationHistory';
@@ -73,6 +74,7 @@ export function TabContent({
               </div>
             )}
             <HazardRiskGraph location={weather?.name} />
+            <MonthlyHazardTrends location={weather?.name} />
             <SafetyTips alerts={alerts} />
             <PhilippinesNews />
           </>
