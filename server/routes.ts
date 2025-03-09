@@ -16,7 +16,7 @@ import { z } from "zod";
 const weatherCache = new NodeCache({ stdTTL: 1800 });
 
 // Get API key from environment variables
-const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY || "";
+const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY || "9dda8703a160d6dfb09adb012c9e1c00";
 if (!OPENWEATHER_API_KEY) {
   console.warn("OpenWeather API key is missing. Weather data may not be available.");
 }
