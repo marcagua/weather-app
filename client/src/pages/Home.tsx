@@ -32,6 +32,8 @@ const Home = () => {
   const [searchVisible, setSearchVisible] = useState(false);
   const [location, setLocation] = useState<LocationData>(DEFAULT_LOCATION);
   const [backgroundClass, setBackgroundClass] = useState('weather-gradient');
+  const [locationLoaded, setLocationLoaded] = useState(false);
+
 
   // Fetch current weather
   const { 
@@ -70,7 +72,7 @@ const Home = () => {
   });
 
   const isLoading = isWeatherLoading || isForecastLoading || isAlertsLoading;
-  
+
   // Show toast when API errors occur
   useEffect(() => {
     if (weatherError || forecastError || alertsError) {
@@ -90,7 +92,7 @@ const Home = () => {
       const currentTime = Math.floor(Date.now() / 1000);
       const isNight = currentTime > weather.sys.sunset || currentTime < weather.sys.sunrise;
       const weatherMain = weather.weather[0]?.main?.toLowerCase() || '';
-      
+
       if (isNight) {
         setBackgroundClass('night-gradient');
       } else if (weatherMain.includes('rain') || weatherMain.includes('drizzle') || weatherMain.includes('thunderstorm')) {
@@ -108,18 +110,19 @@ const Home = () => {
 
   // Try to detect user's location on first load
   useEffect(() => {
-    getUserLocation();
-    // We don't add getUserLocation to deps because it would create an infinite loop
+    if (!locationLoaded) {
+      getUserLocation();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getUserLocation = () => {
+  const getUserLocation = async () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           try {
             const { latitude, longitude } = position.coords;
-            
+
             // Get location name
             const response = await apiRequest(
               'GET', 
@@ -127,7 +130,7 @@ const Home = () => {
               undefined
             );
             const data = await response.json();
-            
+
             if (data && data.length > 0) {
               setLocation({
                 name: data[0].name,
@@ -135,7 +138,7 @@ const Home = () => {
                 lon: longitude,
                 country: data[0].country
               });
-              
+              setLocationLoaded(true);
               // Save to recent locations
               await apiRequest('POST', '/api/locations', {
                 name: data[0].name,
@@ -145,6 +148,7 @@ const Home = () => {
               });
             } else {
               console.error('Failed to get location name');
+              setLocationLoaded(true); // Set to true even if failed to get location name
             }
           } catch (error) {
             console.error('Failed to get location details:', error);
@@ -153,10 +157,12 @@ const Home = () => {
               description: "Could not determine your location. Using default location.",
               variant: "destructive"
             });
+            setLocationLoaded(true); // Set to true even if failed
           }
         },
         (error) => {
           console.warn('Geolocation error:', error);
+          setLocationLoaded(true); // Set to true even if geolocation fails
           // Using default location if geolocation fails
         }
       );
@@ -179,13 +185,13 @@ const Home = () => {
         location={location.name} 
         onSearchClick={() => setSearchVisible(true)} 
       />
-      
+
       {/* Navigation Tabs */}
       <NavigationTabs 
         activeTab={activeTab} 
         onTabChange={handleTabChange} 
       />
-      
+
       {/* Tab Content */}
       <TabContent 
         activeTab={activeTab}
@@ -195,7 +201,7 @@ const Home = () => {
         isLoading={isLoading}
         coordinates={location}
       />
-      
+
       {/* Location Search Modal */}
       <LocationSearch 
         isVisible={searchVisible}
