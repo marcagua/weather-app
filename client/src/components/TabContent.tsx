@@ -74,7 +74,6 @@ export function TabContent({
               </div>
             )}
             <HazardRiskGraph location={weather?.name} />
-            <MonthlyHazardTrends location={weather?.name} />
             <SafetyTips alerts={alerts} />
             <PhilippinesNews />
           </>
@@ -88,6 +87,7 @@ export function TabContent({
         ) : (
           <>
             <WeatherApiTrend location={weather?.name || "Tagbilaran City"} />
+            <MonthlyHazardTrends location={weather?.name} />
             <SeasonalOutlook />
           </>
         )}

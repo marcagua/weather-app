@@ -528,27 +528,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const recentEvents = [
       {
         type: 'Typhoon',
-        name: 'Typhoon Carina',
-        date: 'July 24, 2023',
-        description: 'Enhanced the southwest monsoon, causing heavy rainfall and flooding in Metro Manila and nearby provinces.'
+        name: 'Typhoon Marilyn',
+        date: 'August 15, 2025',
+        description: 'Super typhoon with sustained winds of 195 km/h struck Eastern Visayas, causing widespread devastation and displacing over 120,000 residents.'
       },
       {
         type: 'Flood',
-        name: 'Cagayan Valley Flooding',
-        date: 'June 15, 2023',
-        description: 'Heavy monsoon rains caused significant flooding in Cagayan Valley, affecting thousands of residents.'
+        name: 'Central Luzon Flooding',
+        date: 'July 10, 2025',
+        description: 'Record-breaking monsoon rains caused severe flooding in Pampanga, Bulacan, and Nueva Ecija, submerging agricultural lands and urban areas.'
       },
       {
         type: 'Earthquake',
-        name: 'Abra Earthquake',
-        date: 'May 5, 2023',
-        description: 'A magnitude 5.8 earthquake struck Abra province, causing minor damage to infrastructure.'
+        name: 'Mindanao Magnitude 6.7 Earthquake',
+        date: 'May 23, 2025',
+        description: 'Strong earthquake centered near Davao caused significant structural damage and triggered landslides in mountainous regions.'
       },
       {
         type: 'Volcanic',
-        name: 'Taal Volcano Activity',
-        date: 'April 12, 2023',
-        description: 'Taal Volcano showed increased activity with slight inflation and elevated sulfur dioxide emissions.'
+        name: 'Mayon Volcano Eruption',
+        date: 'March 8, 2025',
+        description: 'Significant eruption with pyroclastic flows reaching 5km from the crater, prompting evacuation of nearby communities in Albay province.'
       }
     ];
     

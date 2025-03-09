@@ -42,8 +42,8 @@ const MonthlyHazardTrends: React.FC<MonthlyHazardTrendsProps> = ({ location = 'P
           </div>
         ) : (
           <>
-            <div className="w-full" style={{ height: '350px', minHeight: '350px', width: '100%', display: 'block' }}>
-              <ResponsiveContainer width="100%" height="100%">
+            <div style={{ width: '100%', height: '400px', minHeight: '400px', position: 'relative' }}>
+              <ResponsiveContainer width="99%" height="100%" aspect={1.5}>
                 <LineChart
                   data={trendsData}
                   margin={{
@@ -144,7 +144,7 @@ const MonthlyHazardTrends: React.FC<MonthlyHazardTrendsProps> = ({ location = 'P
                 <span className="font-medium">Data sources:</span> {dataSources.join(', ')}
               </p>
               <p className="mt-2">
-                <span className="text-amber-600 font-medium">Note:</span> Risk levels vary based on seasonal patterns. Typhoon season typically peaks from July to October.
+                <span className="text-amber-600 font-medium">Note:</span> Risk levels for 2025 show increased intensity during typhoon season (July to October) with earlier onset of severe weather events compared to previous years.
               </p>
             </div>
           </>
