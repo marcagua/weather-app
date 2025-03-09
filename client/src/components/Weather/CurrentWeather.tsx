@@ -1,83 +1,91 @@
-import { WeatherResponse } from '@shared/schema';
-import { 
-  Thermometer, Wind, Droplets, Gauge, Eye 
-} from 'lucide-react';
-import { getWeatherIcon } from '@/lib/weatherIcons';
-import { kelvinToCelsius } from '@/lib/utils';
+import React from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Card, CardContent } from '@/components/ui/card';
+import { getTimeAgo, getUVIndexLevel } from '@/lib/utils';
+import { WeatherIconByCondition } from '@/lib/weatherIcons';
+import { CurrentWeather as CurrentWeatherType } from '@shared/schema';
 
 interface CurrentWeatherProps {
-  currentWeather: WeatherResponse;
+  weatherData: CurrentWeatherType | undefined;
+  isLoading: boolean;
 }
 
-const CurrentWeather = ({ currentWeather }: CurrentWeatherProps) => {
-  if (!currentWeather) return null;
-
-  // Convert temperatures to Celsius and whole numbers
-  const temperature = Math.round(kelvinToCelsius(currentWeather.main.temp));
-  const highTemp = Math.round(kelvinToCelsius(currentWeather.main.temp_max));
-  const lowTemp = Math.round(kelvinToCelsius(currentWeather.main.temp_min));
-  
-  // Get weather description from first weather item in array
-  const weatherDescription = 
-    currentWeather.weather && 
-    currentWeather.weather.length > 0 ? 
-    currentWeather.weather[0].description : '';
-  
-  // Get appropriate weather icon
-  const weatherIconCode = 
-    currentWeather.weather && 
-    currentWeather.weather.length > 0 ? 
-    currentWeather.weather[0].icon : '01d';
-  
-  // Convert visibility from meters to kilometers
-  const visibilityKm = Math.round((currentWeather.visibility / 1000) * 10) / 10;
-  
-  return (
-    <div className="mb-8">
-      <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between">
-        <div className="text-center sm:text-left mb-4 sm:mb-0">
-          <div className="text-6xl sm:text-7xl font-display font-bold text-secondary">
-            {temperature}°
-          </div>
-          <div className="text-lg text-gray-600 capitalize">
-            {weatherDescription}
-          </div>
-          <div className="flex items-center justify-center sm:justify-start mt-2 text-gray-600">
-            <span className="flex items-center mr-3">
-              <Thermometer className="h-4 w-4 mr-1 text-red-500" />
-              <span>{highTemp}°</span>
-            </span>
-            <span className="flex items-center">
-              <Thermometer className="h-4 w-4 mr-1 text-blue-500" />
-              <span>{lowTemp}°</span>
-            </span>
-          </div>
+const CurrentWeather: React.FC<CurrentWeatherProps> = ({ weatherData, isLoading }) => {
+  if (isLoading) {
+    return (
+      <section className="mb-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold">Current Weather</h2>
+          <Skeleton className="h-5 w-32" />
         </div>
         
-        <div className="flex flex-col items-center">
-          {getWeatherIcon(weatherIconCode, 'h-16 w-16 sm:h-20 sm:w-20 mb-2 text-accent')}
-          
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm sm:text-base">
-            <div className="flex items-center">
-              <Wind className="w-5 h-5 text-gray-500 mr-1" />
-              <span>{Math.round(currentWeather.wind.speed)} m/s</span>
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex">
+              <Skeleton className="h-9 w-9 mr-4" />
+              <div className="flex-1">
+                <div className="grid grid-cols-2 gap-y-2 gap-x-4">
+                  {[...Array(4)].map((_, i) => (
+                    <div key={i}>
+                      <Skeleton className="h-4 w-20 mb-1" />
+                      <Skeleton className="h-6 w-16" />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div className="flex items-center">
-              <Droplets className="w-5 h-5 text-gray-500 mr-1" />
-              <span>{currentWeather.main.humidity}%</span>
+          </CardContent>
+        </Card>
+      </section>
+    );
+  }
+
+  if (!weatherData) {
+    return null;
+  }
+
+  return (
+    <section className="mb-6">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-semibold">Current Weather</h2>
+        <span className="text-sm text-textSecondary">
+          {weatherData.updatedAt ? `Updated ${getTimeAgo(weatherData.updatedAt)}` : ''}
+        </span>
+      </div>
+      
+      <Card className="shadow-sm">
+        <CardContent className="p-4">
+          <div className="flex">
+            <div className="mr-4">
+              <WeatherIconByCondition 
+                condition={weatherData.condition} 
+                className="text-[36px] text-secondary" 
+              />
             </div>
-            <div className="flex items-center">
-              <Gauge className="w-5 h-5 text-gray-500 mr-1" />
-              <span>{currentWeather.main.pressure} hPa</span>
-            </div>
-            <div className="flex items-center">
-              <Eye className="w-5 h-5 text-gray-500 mr-1" />
-              <span>{visibilityKm} km</span>
+            <div className="flex-1">
+              <div className="grid grid-cols-2 gap-y-2 gap-x-4">
+                <div>
+                  <div className="text-sm text-textSecondary">Feels Like</div>
+                  <div className="font-medium">{weatherData.feelsLike}°</div>
+                </div>
+                <div>
+                  <div className="text-sm text-textSecondary">Humidity</div>
+                  <div className="font-medium">{weatherData.humidity}%</div>
+                </div>
+                <div>
+                  <div className="text-sm text-textSecondary">Wind</div>
+                  <div className="font-medium">{weatherData.windSpeed} mph {weatherData.windDirection}</div>
+                </div>
+                <div>
+                  <div className="text-sm text-textSecondary">UV Index</div>
+                  <div className="font-medium">{weatherData.uvIndex} ({getUVIndexLevel(weatherData.uvIndex)})</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </CardContent>
+      </Card>
+    </section>
   );
 };
 
