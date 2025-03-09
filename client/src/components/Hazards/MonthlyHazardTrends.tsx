@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TrendingUp } from 'lucide-react';
@@ -41,15 +42,15 @@ const MonthlyHazardTrends: React.FC<MonthlyHazardTrendsProps> = ({ location = 'P
           </div>
         ) : (
           <>
-            <div className="h-72 sm:h-80" style={{ minWidth: "300px", minHeight: "300px" }}> {/* Added minHeight */}
+            <div className="w-full" style={{ height: '350px', minHeight: '350px', width: '100%', display: 'block' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                   data={trendsData}
                   margin={{
-                    top: 5,
-                    right: 5,
-                    left: 5,
-                    bottom: 5,
+                    top: 20,
+                    right: 30,
+                    left: 20,
+                    bottom: 10,
                   }}
                 >
                   <CartesianGrid strokeDasharray="3 3" />
@@ -73,38 +74,42 @@ const MonthlyHazardTrends: React.FC<MonthlyHazardTrendsProps> = ({ location = 'P
                       padding: '8px'
                     }}
                   />
-                  <Legend />
-                  <Line 
-                    type="monotone" 
-                    dataKey="typhoon" 
-                    name="Typhoon" 
-                    stroke="#ff4d4f" 
+                  <Legend verticalAlign="bottom" height={36} />
+                  <Line
+                    type="monotone"
+                    dataKey="typhoon"
+                    name="Typhoon"
+                    stroke="#ff4d4f"
                     strokeWidth={2}
-                    activeDot={{ r: 8 }}
+                    dot={{ r: 4 }}
+                    activeDot={{ r: 6 }}
                   />
-                  <Line 
-                    type="monotone" 
-                    dataKey="flood" 
-                    name="Flood" 
-                    stroke="#1890ff" 
+                  <Line
+                    type="monotone"
+                    dataKey="flood"
+                    name="Flood"
+                    stroke="#1890ff"
                     strokeWidth={2}
-                    activeDot={{ r: 8 }}
+                    dot={{ r: 4 }}
+                    activeDot={{ r: 6 }}
                   />
-                  <Line 
-                    type="monotone" 
-                    dataKey="earthquake" 
-                    name="Earthquake" 
-                    stroke="#faad14" 
+                  <Line
+                    type="monotone"
+                    dataKey="earthquake"
+                    name="Earthquake"
+                    stroke="#faad14"
                     strokeWidth={2}
-                    activeDot={{ r: 8 }}
+                    dot={{ r: 4 }}
+                    activeDot={{ r: 6 }}
                   />
-                  <Line 
-                    type="monotone" 
-                    dataKey="volcanic" 
-                    name="Volcanic" 
-                    stroke="#722ed1" 
+                  <Line
+                    type="monotone"
+                    dataKey="volcanic"
+                    name="Volcanic"
+                    stroke="#722ed1"
                     strokeWidth={2}
-                    activeDot={{ r: 8 }}
+                    dot={{ r: 4 }}
+                    activeDot={{ r: 6 }}
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -112,23 +117,22 @@ const MonthlyHazardTrends: React.FC<MonthlyHazardTrendsProps> = ({ location = 'P
 
             <div className="mt-6">
               <h3 className="text-md font-semibold mb-2">Recent Hazard Events</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
                 {recentHazardEvents.map((event, index) => (
-                  <div key={index} className="border rounded-md p-3 bg-gray-50">
-                    <div className="flex items-start">
-                      <div className={`w-2 h-2 rounded-full mt-1.5 mr-2 ${
-                        event.type === 'Typhoon' ? 'bg-red-500' :
-                        event.type === 'Flood' ? 'bg-blue-500' :
-                        event.type === 'Earthquake' ? 'bg-yellow-500' :
-                        'bg-purple-500'
-                      }`} />
+                  <div key={index} className="border rounded-md p-3">
+                    <div className="flex items-start justify-between">
                       <div>
-                        <h4 className="font-semibold text-sm">
-                          {event.type}: {event.name}
+                        <h4 className="font-medium">
+                          <span className={`inline-block w-2 h-2 rounded-full mr-2 ${
+                            event.type === 'Typhoon' ? 'bg-red-500' :
+                            event.type === 'Flood' ? 'bg-blue-500' :
+                            event.type === 'Earthquake' ? 'bg-amber-500' : 'bg-purple-500'
+                          }`}></span>
+                          {event.name}
                         </h4>
-                        <p className="text-xs text-gray-500 mt-0.5">{event.date}</p>
-                        <p className="text-xs mt-1">{event.description}</p>
+                        <p className="text-sm text-gray-600">{event.description}</p>
                       </div>
+                      <span className="text-xs text-gray-500">{event.date}</span>
                     </div>
                   </div>
                 ))}

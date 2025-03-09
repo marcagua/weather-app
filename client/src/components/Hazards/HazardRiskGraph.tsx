@@ -1,16 +1,8 @@
+
 import React from 'react';
-import { 
-  Bar, 
-  BarChart, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  Legend, 
-  ResponsiveContainer 
-} from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertCircle } from 'lucide-react';
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 interface HazardRiskGraphProps {
   location?: string;
@@ -61,15 +53,15 @@ const HazardRiskGraph: React.FC<HazardRiskGraphProps> = ({ location = 'Philippin
         <p className="text-sm font-medium mt-1">{location}</p>
       </CardHeader>
       <CardContent>
-        <div className="h-72 sm:h-80" style={{ minWidth: "300px" }}>
-          <ResponsiveContainer width="100%" height="100%" minHeight={250}>
+        <div className="w-full" style={{ height: '350px', minHeight: '350px', width: '100%', display: 'block' }}>
+          <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={hazardRiskData}
               margin={{
-                top: 5,
-                right: 5,
-                left: 5,
-                bottom: 5,
+                top: 20,
+                right: 30,
+                left: 20,
+                bottom: 10,
               }}
               barSize={40}
             >
@@ -88,30 +80,28 @@ const HazardRiskGraph: React.FC<HazardRiskGraphProps> = ({ location = 'Philippin
                 formatter={(value) => [`${value}%`, 'Risk Level']}
                 labelStyle={{ fontWeight: 'bold' }}
                 contentStyle={{ 
-                  backgroundColor: '#fff', 
+                  backgroundColor: '#fff',
                   border: '1px solid #ccc',
                   borderRadius: '4px',
                   padding: '8px'
                 }}
               />
-              <Legend />
-              <Bar 
-                dataKey="risk" 
-                name="Risk Level" 
-                fill="#8884d8" 
-                radius={[4, 4, 0, 0]}
-              />
+              <Legend verticalAlign="bottom" height={36} />
+              <Bar dataKey="risk" name="Risk Level" fill="#8884d8" background={{ fill: '#eee' }} />
             </BarChart>
           </ResponsiveContainer>
         </div>
         
         <div className="mt-4 text-sm text-gray-600">
           <p>
-            <span className="font-medium">Data source:</span> Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) and Philippine Institute of Volcanology and Seismology (PHIVOLCS)
+            <span className="font-medium">Risk level interpretation:</span>
           </p>
-          <p className="mt-2">
-            <span className="text-red-500 font-medium">Important:</span> Risk levels above 60% require immediate attention and preparedness.
-          </p>
+          <ul className="list-disc ml-5 mt-1 space-y-1">
+            <li>0-25%: Low risk - Be aware</li>
+            <li>26-50%: Moderate risk - Stay prepared</li>
+            <li>51-75%: High risk - Take precautions</li>
+            <li>76-100%: Extreme risk - Follow evacuation orders</li>
+          </ul>
         </div>
       </CardContent>
     </Card>
