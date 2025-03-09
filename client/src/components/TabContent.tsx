@@ -3,9 +3,10 @@ import CurrentWeather from './Weather/CurrentWeather';
 import HourlyForecast from './Weather/HourlyForecast';
 import DailyForecast from './Weather/DailyForecast';
 import WeatherAlerts from './Hazards/WeatherAlerts';
-import HazardMap from './Hazards/HazardMap';
+import HazardRiskGraph from './Hazards/HazardRiskGraph';
 import SafetyTips from './Hazards/SafetyTips';
 import PhilippinesNews from './Hazards/PhilippinesNews';
+import WeatherApiTrend from './Trends/WeatherApiTrend';
 import TemperatureTrend from './Trends/TemperatureTrend';
 import PrecipitationHistory from './Trends/PrecipitationHistory';
 import SeasonalOutlook from './Trends/SeasonalOutlook';
@@ -90,7 +91,7 @@ export function TabContent({
                 </div>
               </div>
             )}
-            {coordinates && <HazardMap lat={coordinates.lat} lon={coordinates.lon} />}
+            <HazardRiskGraph location={weather?.name} />
             <SafetyTips alerts={alerts} />
             <PhilippinesNews />
           </>

@@ -3,6 +3,7 @@ import {
   Thermometer, Wind, Droplets, Gauge, Eye 
 } from 'lucide-react';
 import { getWeatherIcon } from '@/lib/weatherIcons';
+import { kelvinToCelsius } from '@/lib/utils';
 
 interface CurrentWeatherProps {
   currentWeather: WeatherResponse;
@@ -11,10 +12,10 @@ interface CurrentWeatherProps {
 const CurrentWeather = ({ currentWeather }: CurrentWeatherProps) => {
   if (!currentWeather) return null;
 
-  // Convert temperatures to whole numbers
-  const temperature = Math.round(currentWeather.main.temp);
-  const highTemp = Math.round(currentWeather.main.temp_max);
-  const lowTemp = Math.round(currentWeather.main.temp_min);
+  // Convert temperatures to Celsius and whole numbers
+  const temperature = Math.round(kelvinToCelsius(currentWeather.main.temp));
+  const highTemp = Math.round(kelvinToCelsius(currentWeather.main.temp_max));
+  const lowTemp = Math.round(kelvinToCelsius(currentWeather.main.temp_min));
   
   // Get weather description from first weather item in array
   const weatherDescription = 
@@ -28,8 +29,8 @@ const CurrentWeather = ({ currentWeather }: CurrentWeatherProps) => {
     currentWeather.weather.length > 0 ? 
     currentWeather.weather[0].icon : '01d';
   
-  // Convert visibility from meters to miles
-  const visibilityMiles = Math.round((currentWeather.visibility / 1609) * 10) / 10;
+  // Convert visibility from meters to kilometers
+  const visibilityKm = Math.round((currentWeather.visibility / 1000) * 10) / 10;
   
   return (
     <div className="mb-8">
@@ -59,7 +60,7 @@ const CurrentWeather = ({ currentWeather }: CurrentWeatherProps) => {
           <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm sm:text-base">
             <div className="flex items-center">
               <Wind className="w-5 h-5 text-gray-500 mr-1" />
-              <span>{Math.round(currentWeather.wind.speed)} mph</span>
+              <span>{Math.round(currentWeather.wind.speed)} m/s</span>
             </div>
             <div className="flex items-center">
               <Droplets className="w-5 h-5 text-gray-500 mr-1" />
@@ -71,7 +72,7 @@ const CurrentWeather = ({ currentWeather }: CurrentWeatherProps) => {
             </div>
             <div className="flex items-center">
               <Eye className="w-5 h-5 text-gray-500 mr-1" />
-              <span>{visibilityMiles} mi</span>
+              <span>{visibilityKm} km</span>
             </div>
           </div>
         </div>
