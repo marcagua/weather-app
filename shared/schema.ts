@@ -23,7 +23,7 @@ export const locations = pgTable("locations", {
   name: text("name").notNull(),
   lat: text("lat").notNull(),
   lon: text("lon").notNull(),
-  country: text("country"),
+  country: text("country").notNull().default(''),
   lastUpdated: timestamp("last_updated"),
 });
 

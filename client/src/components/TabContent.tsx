@@ -5,12 +5,11 @@ import DailyForecast from './Weather/DailyForecast';
 import WeatherAlerts from './Hazards/WeatherAlerts';
 import HazardMap from './Hazards/HazardMap';
 import SafetyTips from './Hazards/SafetyTips';
+import PhilippinesNews from './Hazards/PhilippinesNews';
 import TemperatureTrend from './Trends/TemperatureTrend';
 import PrecipitationHistory from './Trends/PrecipitationHistory';
 import SeasonalOutlook from './Trends/SeasonalOutlook';
-import DataSources from './References/DataSources';
-import WeatherTerminology from './References/WeatherTerminology';
-import AboutApp from './References/AboutApp';
+import PhilippinesReferences from './References/PhilippinesReferences';
 import { ForecastResponse, WeatherResponse } from '@shared/schema';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -55,6 +54,7 @@ export function TabContent({
             <WeatherAlerts alerts={alerts} />
             {coordinates && <HazardMap lat={coordinates.lat} lon={coordinates.lon} />}
             <SafetyTips alerts={alerts} />
+            <PhilippinesNews />
           </>
         )}
       </div>
@@ -74,9 +74,7 @@ export function TabContent({
 
       {/* References Tab Content */}
       <div className={`p-4 sm:p-6 ${activeTab === 'references' ? '' : 'hidden'}`}>
-        <DataSources />
-        <WeatherTerminology />
-        <AboutApp />
+        <PhilippinesReferences />
       </div>
     </main>
   );

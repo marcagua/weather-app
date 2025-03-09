@@ -65,6 +65,7 @@ export class MemStorage implements IStorage {
     const newLocation: Location = {
       ...insertLocation,
       id,
+      country: insertLocation.country || '',
       lastUpdated: new Date()
     };
     
