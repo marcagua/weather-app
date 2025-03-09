@@ -438,6 +438,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const references = {
       weatherDataSources: [
         {
+          name: "WeatherAPI.com",
+          description: "Comprehensive weather service with real-time and forecast weather data for global locations.",
+          website: "https://www.weatherapi.com/"
+        },
+        {
           name: "OpenWeatherMap API",
           description: "Global weather data service providing current, forecast, and historical weather information.",
           website: "https://openweathermap.org/"

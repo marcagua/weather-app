@@ -1,5 +1,6 @@
 import { TabType } from './NavigationTabs';
 import CurrentWeather from './Weather/CurrentWeather';
+import WeatherAPICurrentWeather from './Weather/WeatherAPICurrentWeather';
 import HourlyForecast from './Weather/HourlyForecast';
 import DailyForecast from './Weather/DailyForecast';
 import WeatherAlerts from './Hazards/WeatherAlerts';
@@ -37,29 +38,9 @@ export function TabContent({
       <div className={`p-4 sm:p-6 ${activeTab === 'weather' ? '' : 'hidden'}`}>
         {isLoading ? (
           <WeatherLoadingSkeleton />
-        ) : !weather ? (
-          <div className="p-4 text-center">
-            <div className="mb-3 flex justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-              </svg>
-            </div>
-            <h3 className="text-base font-medium text-gray-900">Weather Data Unavailable</h3>
-            <p className="mt-2 text-sm text-gray-600">
-              We're having trouble accessing weather data. This could be due to API activation delay (up to 2 hours) or connectivity issues.
-            </p>
-            <div className="mt-3 flex flex-col gap-2">
-              <a href="#hazards" className="text-sm px-3 py-2 bg-blue-50 text-blue-700 rounded-lg font-medium">
-                📰 View Philippines News →
-              </a>
-              <a href="#references" className="text-sm px-3 py-2 bg-blue-50 text-blue-700 rounded-lg font-medium">
-                📚 Check Weather Resources →
-              </a>
-            </div>
-          </div>
         ) : (
           <>
-            <CurrentWeather currentWeather={weather} />
+            <WeatherAPICurrentWeather location={weather?.name || "Tagbilaran City"} />
             {forecast && <HourlyForecast hourlyData={forecast.list.slice(0, 8)} />}
             {forecast && <DailyForecast forecast={forecast} />}
           </>
@@ -102,26 +83,6 @@ export function TabContent({
       <div className={`p-4 sm:p-6 ${activeTab === 'trends' ? '' : 'hidden'}`}>
         {isLoading ? (
           <TrendsLoadingSkeleton />
-        ) : !weather ? (
-          <div className="p-4 text-center">
-            <div className="mb-3 flex justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-              </svg>
-            </div>
-            <h3 className="text-base font-medium text-gray-900">Historical Data Unavailable</h3>
-            <p className="mt-2 text-sm text-gray-600">
-              We're having trouble accessing historical weather data. This could be due to API activation delays.
-            </p>
-            <div className="mt-3 flex flex-col gap-2">
-              <a href="#hazards" className="text-sm px-3 py-2 bg-blue-50 text-blue-700 rounded-lg font-medium">
-                📰 View Philippines News →
-              </a>
-              <a href="#references" className="text-sm px-3 py-2 bg-blue-50 text-blue-700 rounded-lg font-medium">
-                🌧️ Check Weather Resources →
-              </a>
-            </div>
-          </div>
         ) : (
           <>
             <WeatherApiTrend location={weather?.name || "Tagbilaran City"} />
