@@ -111,7 +111,7 @@ function WeatherLoadingSkeleton() {
             <Skeleton className="h-6 w-48 mb-2" />
             <Skeleton className="h-6 w-32" />
           </div>
-          
+
           <div className="flex flex-col items-center">
             <Skeleton className="h-16 w-16 rounded-full mb-4" />
             <div className="grid grid-cols-2 gap-x-4 gap-y-2">
@@ -123,7 +123,7 @@ function WeatherLoadingSkeleton() {
           </div>
         </div>
       </div>
-      
+
       <div className="mb-8">
         <Skeleton className="h-6 w-48 mb-4" />
         <div className="flex space-x-4 overflow-x-auto pb-2">
@@ -132,7 +132,7 @@ function WeatherLoadingSkeleton() {
           ))}
         </div>
       </div>
-      
+
       <div>
         <Skeleton className="h-6 w-48 mb-4" />
         <div className="space-y-3">
@@ -153,12 +153,12 @@ function HazardsLoadingSkeleton() {
         <Skeleton className="h-32 w-full rounded-lg mb-4" />
         <Skeleton className="h-32 w-full rounded-lg" />
       </div>
-      
+
       <div className="mb-8">
         <Skeleton className="h-6 w-48 mb-4" />
         <Skeleton className="h-64 w-full rounded-lg" />
       </div>
-      
+
       <div>
         <Skeleton className="h-6 w-48 mb-4" />
         <Skeleton className="h-48 w-full rounded-lg mb-3" />
@@ -175,12 +175,12 @@ function TrendsLoadingSkeleton() {
         <Skeleton className="h-6 w-48 mb-4" />
         <Skeleton className="h-64 w-full rounded-lg" />
       </div>
-      
+
       <div className="mb-8">
         <Skeleton className="h-6 w-48 mb-4" />
         <Skeleton className="h-64 w-full rounded-lg" />
       </div>
-      
+
       <div>
         <Skeleton className="h-6 w-48 mb-4" />
         <Skeleton className="h-32 w-full rounded-lg mb-4" />

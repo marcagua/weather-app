@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TrendingUp } from 'lucide-react';
@@ -20,7 +19,7 @@ const MonthlyHazardTrends: React.FC<MonthlyHazardTrendsProps> = ({ location = 'P
   const trendsData = data?.trends || [];
   const recentHazardEvents = data?.recentEvents || [];
   const dataSources = data?.sources || [];
-  
+
   return (
     <Card className="mb-6">
       <CardHeader className="pb-2">
@@ -42,8 +41,8 @@ const MonthlyHazardTrends: React.FC<MonthlyHazardTrendsProps> = ({ location = 'P
           </div>
         ) : (
           <>
-            <div className="h-72 sm:h-80" style={{ minWidth: "300px" }}>
-              <ResponsiveContainer width="100%" height="100%" minHeight={250}>
+            <div className="h-72 sm:h-80" style={{ minWidth: "300px", minHeight: "300px" }}> {/* Added minHeight */}
+              <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                   data={trendsData}
                   margin={{
@@ -53,64 +52,64 @@ const MonthlyHazardTrends: React.FC<MonthlyHazardTrendsProps> = ({ location = 'P
                     bottom: 5,
                   }}
                 >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" />
-              <YAxis 
-                domain={[0, 100]} 
-                label={{ 
-                  value: 'Risk Level (%)', 
-                  angle: -90, 
-                  position: 'insideLeft',
-                  style: { textAnchor: 'middle' }
-                }} 
-              />
-              <Tooltip
-                formatter={(value) => [`${value}%`, 'Risk Level']}
-                labelStyle={{ fontWeight: 'bold' }}
-                contentStyle={{ 
-                  backgroundColor: '#fff',
-                  border: '1px solid #ccc',
-                  borderRadius: '4px',
-                  padding: '8px'
-                }}
-              />
-              <Legend />
-              <Line 
-                type="monotone" 
-                dataKey="typhoon" 
-                name="Typhoon" 
-                stroke="#ff4d4f" 
-                strokeWidth={2}
-                activeDot={{ r: 8 }}
-              />
-              <Line 
-                type="monotone" 
-                dataKey="flood" 
-                name="Flood" 
-                stroke="#1890ff" 
-                strokeWidth={2}
-                activeDot={{ r: 8 }}
-              />
-              <Line 
-                type="monotone" 
-                dataKey="earthquake" 
-                name="Earthquake" 
-                stroke="#faad14" 
-                strokeWidth={2}
-                activeDot={{ r: 8 }}
-              />
-              <Line 
-                type="monotone" 
-                dataKey="volcanic" 
-                name="Volcanic" 
-                stroke="#722ed1" 
-                strokeWidth={2}
-                activeDot={{ r: 8 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-            
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis 
+                    domain={[0, 100]} 
+                    label={{ 
+                      value: 'Risk Level (%)', 
+                      angle: -90, 
+                      position: 'insideLeft',
+                      style: { textAnchor: 'middle' }
+                    }} 
+                  />
+                  <Tooltip
+                    formatter={(value) => [`${value}%`, 'Risk Level']}
+                    labelStyle={{ fontWeight: 'bold' }}
+                    contentStyle={{ 
+                      backgroundColor: '#fff',
+                      border: '1px solid #ccc',
+                      borderRadius: '4px',
+                      padding: '8px'
+                    }}
+                  />
+                  <Legend />
+                  <Line 
+                    type="monotone" 
+                    dataKey="typhoon" 
+                    name="Typhoon" 
+                    stroke="#ff4d4f" 
+                    strokeWidth={2}
+                    activeDot={{ r: 8 }}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="flood" 
+                    name="Flood" 
+                    stroke="#1890ff" 
+                    strokeWidth={2}
+                    activeDot={{ r: 8 }}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="earthquake" 
+                    name="Earthquake" 
+                    stroke="#faad14" 
+                    strokeWidth={2}
+                    activeDot={{ r: 8 }}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="volcanic" 
+                    name="Volcanic" 
+                    stroke="#722ed1" 
+                    strokeWidth={2}
+                    activeDot={{ r: 8 }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+
             <div className="mt-6">
               <h3 className="text-md font-semibold mb-2">Recent Hazard Events</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -135,7 +134,7 @@ const MonthlyHazardTrends: React.FC<MonthlyHazardTrendsProps> = ({ location = 'P
                 ))}
               </div>
             </div>
-            
+
             <div className="mt-4 text-sm text-gray-600">
               <p>
                 <span className="font-medium">Data sources:</span> {dataSources.join(', ')}
