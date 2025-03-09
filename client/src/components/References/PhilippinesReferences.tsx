@@ -206,19 +206,28 @@ const PhilippinesReferences = () => {
       {/* About The App */}
       <section>
         <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-          <Info className="h-5 w-5 text-gray-500" />
+          <Info className="h-5 w-5 text-blue-500" />
           About This App
         </h2>
-        <Card>
+        <Card className="bg-gradient-to-br from-blue-50 to-white border border-blue-100">
           <CardContent className="pt-6">
-            <p className="text-gray-600 mb-4">
-              This weather application is designed to provide comprehensive weather information for the Philippines and around the world. The app includes current weather conditions, forecasts, hazard warnings, weather trends, and important reference information.
+            <p className="text-gray-700 mb-4">
+              This weather app was developed by BSCpE 3A students: <strong>Jan Marc Agua</strong>, <strong>Keith Gabriel Bansag</strong>, <strong>Anna Marie Basinang</strong>, <strong>Mary Ecelle</strong>, and <strong>Angelica Malaran</strong>. Designed to provide accurate and real-time weather updates, our app helps users stay informed about current conditions, forecasts, and weather alerts.
             </p>
-            <p className="text-gray-600 mb-4">
+            
+            <p className="text-gray-700 mb-4">
+              With a user-friendly interface and reliable data, this project showcases our skills in software development, API integration, and mobile app design. Our goal is to deliver a seamless weather-tracking experience for everyone.
+            </p>
+            
+            <p className="text-gray-700 mb-4 font-medium italic">
+              Thank you for supporting our project! 🌦️📱
+            </p>
+            
+            <p className="text-gray-600 mt-6 text-sm">
+              This weather application provides comprehensive weather information for the Philippines and around the world. The app includes current weather conditions, forecasts, hazard warnings, weather trends, and important reference information.
+            </p>
+            <p className="text-gray-600 mt-2 text-sm">
               For Philippine users, we've integrated local news sources specifically related to weather events, natural disasters, and climate information. We also provide direct links to official government weather agencies and emergency services.
-            </p>
-            <p className="text-gray-600">
-              The application automatically detects your location to provide relevant weather information, but you can also search for any location worldwide to check weather conditions and forecasts.
             </p>
           </CardContent>
         </Card>
