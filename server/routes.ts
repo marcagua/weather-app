@@ -338,6 +338,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get weather data from WeatherAPI for trends tab
+  router.get("/weather-api", async (req: Request, res: Response) => {
+    try {
+      const location = req.query.location || 'Tagbilaran City';
+      const cacheKey = `weatherapi_${location}`;
+      let cachedData = weatherCache.get(cacheKey);
+
+      if (cachedData) {
+        return res.json(cachedData);
+      }
+
+      const response = await axios.get(
+        `https://api.weatherapi.com/v1/current.json?key=5c340d5092ac482287f13436250903&q=${encodeURIComponent(String(location))}&aqi=no`
+      );
+      
+      // Cache the result for 30 minutes
+      weatherCache.set(cacheKey, response.data, 1800);
+      
+      res.json(response.data);
+    } catch (error: any) {
+      console.error("Failed to fetch WeatherAPI data:", error);
+      res.status(error.response?.status || 500).json({
+        message: error.message || 'Failed to fetch data from WeatherAPI'
+      });
+    }
+  });
+
   // Get Philippines news from RSS feeds for hazards and trends
   router.get("/philippines-news", async (_req: Request, res: Response) => {
     try {

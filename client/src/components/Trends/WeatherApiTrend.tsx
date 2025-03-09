@@ -46,12 +46,12 @@ const WeatherApiTrend: React.FC<WeatherApiTrendProps> = ({ location = 'Tagbilara
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://api.weatherapi.com/v1/current.json?key=5c340d5092ac482287f13436250903&q=${encodeURIComponent(location)}&aqi=no`);
+        const response = await axios.get(`/api/weather-api?location=${encodeURIComponent(location)}`);
         setData(response.data);
         setError(null);
       } catch (err: any) {
         console.error('Error fetching data from WeatherAPI:', err);
-        setError(err.message || 'Failed to fetch data from WeatherAPI');
+        setError(err.response?.data?.message || err.message || 'Failed to fetch data from WeatherAPI');
       } finally {
         setLoading(false);
       }

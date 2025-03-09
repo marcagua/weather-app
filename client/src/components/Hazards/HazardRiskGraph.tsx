@@ -61,8 +61,8 @@ const HazardRiskGraph: React.FC<HazardRiskGraphProps> = ({ location = 'Philippin
         <p className="text-sm font-medium mt-1">{location}</p>
       </CardHeader>
       <CardContent>
-        <div className="h-72 sm:h-80">
-          <ResponsiveContainer width="100%" height="100%">
+        <div className="h-72 sm:h-80" style={{ minWidth: "300px" }}>
+          <ResponsiveContainer width="100%" height="100%" minHeight={250}>
             <BarChart
               data={hazardRiskData}
               margin={{

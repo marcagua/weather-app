@@ -124,8 +124,7 @@ export function TabContent({
           </div>
         ) : (
           <>
-            {coordinates && <TemperatureTrend coordinates={coordinates} />}
-            {coordinates && <PrecipitationHistory coordinates={coordinates} />}
+            <WeatherApiTrend location={weather?.name || "Tagbilaran City"} />
             <SeasonalOutlook />
           </>
         )}
