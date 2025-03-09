@@ -36,38 +36,57 @@ const Home = () => {
   // Fetch current weather
   const { 
     data: weather, 
-    isLoading: isWeatherLoading 
+    isLoading: isWeatherLoading,
+    error: weatherError 
   } = useQuery({
     queryKey: [`/api/weather?lat=${location.lat}&lon=${location.lon}`],
     enabled: !!location.lat && !!location.lon,
     staleTime: 1800000, // 30 minutes
+    retry: 1, // Only retry once to avoid overwhelming API when key is not valid
   });
 
   // Fetch forecast
   const { 
     data: forecast, 
-    isLoading: isForecastLoading 
+    isLoading: isForecastLoading,
+    error: forecastError
   } = useQuery({
     queryKey: [`/api/forecast?lat=${location.lat}&lon=${location.lon}`],
     enabled: !!location.lat && !!location.lon,
     staleTime: 1800000, // 30 minutes
+    retry: 1,
   });
 
   // Fetch alerts
   const { 
     data: oneCallData, 
-    isLoading: isAlertsLoading 
+    isLoading: isAlertsLoading,
+    error: alertsError
   } = useQuery({
     queryKey: [`/api/onecall?lat=${location.lat}&lon=${location.lon}`],
     enabled: !!location.lat && !!location.lon,
     staleTime: 1800000, // 30 minutes
+    retry: 1,
   });
 
   const isLoading = isWeatherLoading || isForecastLoading || isAlertsLoading;
+  
+  // Show toast when API errors occur
+  useEffect(() => {
+    if (weatherError || forecastError || alertsError) {
+      // Only show once when any error occurs
+      toast({
+        title: "Weather API Issue",
+        description: "We're experiencing issues with the weather data service. This might be due to API key activation delay (typically 2 hours) or service disruption.",
+        variant: "destructive",
+        duration: 5000
+      });
+    }
+  }, [weatherError, forecastError, alertsError, toast]);
 
   // Update background based on time of day and weather conditions
   useEffect(() => {
-    if (weather) {
+    if (weather && weather.sys && weather.weather) {
       const currentTime = Math.floor(Date.now() / 1000);
       const isNight = currentTime > weather.sys.sunset || currentTime < weather.sys.sunrise;
       const weatherMain = weather.weather[0]?.main?.toLowerCase() || '';
@@ -170,9 +189,9 @@ const Home = () => {
       {/* Tab Content */}
       <TabContent 
         activeTab={activeTab}
-        weather={weather}
-        forecast={forecast}
-        alerts={oneCallData?.alerts || []}
+        weather={weather as any}
+        forecast={forecast as any}
+        alerts={(oneCallData as any)?.alerts || []}
         isLoading={isLoading}
         coordinates={location}
       />
