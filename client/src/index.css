@@ -11,3 +11,40 @@
     @apply font-sans antialiased bg-background text-foreground;
   }
 }
+
+/* Weather background gradients */
+.weather-gradient {
+  background: linear-gradient(to bottom, #3498db, #85c1e9);
+}
+
+.night-gradient {
+  background: linear-gradient(to bottom, #2c3e50, #1a2530);
+}
+
+.sunset-gradient {
+  background: linear-gradient(to bottom, #e67e22, #f39c12);
+}
+
+.rain-gradient {
+  background: linear-gradient(to bottom, #3a7bd5, #516395);
+}
+
+.snow-gradient {
+  background: linear-gradient(to bottom, #e0eafc, #cfdef3);
+}
+
+.storm-gradient {
+  background: linear-gradient(to bottom, #373B44, #4286f4);
+}
+
+.fog-gradient {
+  background: linear-gradient(to bottom, #8e9eab, #eef2f3);
+}
+
+.sunny-gradient {
+  background: linear-gradient(to bottom, #2980b9, #6dd5fa);
+}
+
+.cloudy-gradient {
+  background: linear-gradient(to bottom, #757F9A, #D7DDE8);
+}

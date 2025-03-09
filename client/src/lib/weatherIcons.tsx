@@ -1,74 +1,110 @@
 import React from 'react';
+import {
+  Cloud,
+  CloudDrizzle,
+  CloudFog,
+  CloudLightning,
+  CloudRain,
+  CloudSnow,
+  Sun,
+  SunDim,
+  Moon,
+  CloudMoon,
+  CloudSun,
+  Wind
+} from 'lucide-react';
 
-interface WeatherIconProps {
-  iconCode: string;
-  className?: string;
+// Maps OpenWeatherMap icon codes to Lucide icons
+export function getWeatherIcon(code: string, className: string = '') {
+  // First two characters indicate weather condition
+  // Last character indicates day (d) or night (n)
+  const condition = code.slice(0, 2);
+  const isDay = code.slice(-1) === 'd';
+
+  switch (condition) {
+    // Clear sky
+    case '01':
+      return isDay 
+        ? <Sun className={className} /> 
+        : <Moon className={className} />;
+    
+    // Few clouds
+    case '02':
+      return isDay 
+        ? <CloudSun className={className} /> 
+        : <CloudMoon className={className} />;
+    
+    // Scattered clouds
+    case '03':
+      return <Cloud className={className} />;
+    
+    // Broken clouds
+    case '04':
+      return <Cloud className={className} />;
+    
+    // Shower rain
+    case '09':
+      return <CloudDrizzle className={className} />;
+    
+    // Rain
+    case '10':
+      return isDay 
+        ? <CloudRain className={className} /> 
+        : <CloudRain className={className} />;
+    
+    // Thunderstorm
+    case '11':
+      return <CloudLightning className={className} />;
+    
+    // Snow
+    case '13':
+      return <CloudSnow className={className} />;
+    
+    // Mist, fog, etc.
+    case '50':
+      return <CloudFog className={className} />;
+    
+    // Default/unknown
+    default:
+      return isDay 
+        ? <Sun className={className} /> 
+        : <Moon className={className} />;
+  }
 }
 
-const iconMap: Record<string, string> = {
-  '01d': 'wb_sunny',          // Clear sky (day)
-  '01n': 'nights_stay',       // Clear sky (night)
-  '02d': 'partly_cloudy_day', // Few clouds (day)
-  '02n': 'nights_stay',       // Few clouds (night)
-  '03d': 'cloud',             // Scattered clouds
-  '03n': 'cloud',             // Scattered clouds
-  '04d': 'cloud',             // Broken clouds
-  '04n': 'cloud',             // Broken clouds
-  '09d': 'grain',             // Shower rain
-  '09n': 'grain',             // Shower rain
-  '10d': 'water_drop',        // Rain (day)
-  '10n': 'water_drop',        // Rain (night)
-  '11d': 'thunderstorm',      // Thunderstorm
-  '11n': 'thunderstorm',      // Thunderstorm
-  '13d': 'ac_unit',           // Snow
-  '13n': 'ac_unit',           // Snow
-  '50d': 'foggy',             // Mist
-  '50n': 'foggy',             // Mist
-};
-
-const conditionMap: Record<string, string> = {
-  'Clear': 'wb_sunny',
-  'Clouds': 'wb_cloudy',
-  'Rain': 'water_drop',
-  'Drizzle': 'grain',
-  'Thunderstorm': 'thunderstorm',
-  'Snow': 'ac_unit',
-  'Mist': 'foggy',
-  'Smoke': 'foggy',
-  'Haze': 'foggy',
-  'Dust': 'foggy',
-  'Fog': 'foggy',
-  'Sand': 'foggy',
-  'Ash': 'foggy',
-  'Squall': 'air',
-  'Tornado': 'tornado',
-};
-
-export const getIconForCondition = (condition: string): string => {
-  return conditionMap[condition] || 'wb_cloudy';
-};
-
-export const WeatherIcon: React.FC<WeatherIconProps> = ({ iconCode, className = '' }) => {
-  // Get the correct Material Icon name
-  const iconName = iconMap[iconCode] || 'wb_cloudy';
-  
+// Create custom compound icons for more specific weather conditions
+export function getRainIcon(className: string = '') {
   return (
-    <span className={`material-icons ${className}`}>
-      {iconName}
-    </span>
+    <div className="relative inline-block">
+      <Cloud className={className} />
+      <CloudRain className={`absolute top-1/4 left-1/4 ${className}`} style={{ transform: 'scale(0.5)' }} />
+    </div>
   );
-};
+}
 
-export const WeatherIconByCondition: React.FC<{condition: string; className?: string}> = 
-  ({ condition, className = '' }) => {
-  
-  const iconName = getIconForCondition(condition);
-  
+export function getThunderstormIcon(className: string = '') {
   return (
-    <span className={`material-icons ${className}`}>
-      {iconName}
-    </span>
+    <div className="relative inline-block">
+      <Cloud className={className} />
+      <CloudLightning className={`absolute top-1/4 left-1/4 ${className}`} style={{ transform: 'scale(0.5)' }} />
+    </div>
   );
-};
+}
 
-export default WeatherIcon;
+export function getPartlyCloudyIcon(className: string = '') {
+  return (
+    <div className="relative inline-block">
+      <Sun className={className} />
+      <Cloud className={`absolute top-1/4 left-1/4 ${className}`} style={{ transform: 'scale(0.5)' }} />
+    </div>
+  );
+}
+
+export function getWindyIcon(className: string = '') {
+  return (
+    <div className="relative inline-block">
+      <Cloud className={className} />
+      <Wind className={`absolute top-1/2 left-1/4 ${className}`} style={{ transform: 'scale(0.5)' }} />
+    </div>
+  );
+}
