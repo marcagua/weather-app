@@ -17,7 +17,7 @@ const weatherCache = new NodeCache({ stdTTL: 1800 });
 
 // WeatherAPI.com configuration
 const WEATHER_API_KEY = "5c340d5092ac482287f13436250903";
-const WEATHER_API_BASE = "https://api.weatherapi.com/v1";
+const WEATHER_API_BASE = "http://api.weatherapi.com/v1/current.xml?key=5c340d5092ac482287f13436250903&q=Tagbilaran City&aqi=no";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   const router = express.Router();
