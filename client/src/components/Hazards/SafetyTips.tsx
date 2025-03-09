@@ -196,24 +196,24 @@ const SafetyTips = ({ alerts = [] }: SafetyTipsProps) => {
           <div className="p-4 bg-gray-50 rounded-lg">
             <h3 className="font-medium text-lg flex items-center">
               <AlertTriangle className="h-5 w-5 text-blue-500 mr-2" />
-              General Weather Safety
+              Philippines Weather Safety
             </h3>
             <ul className="mt-2 space-y-2 text-gray-700">
               <li className="flex items-start">
                 <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
-                <span>Stay informed about current weather conditions</span>
+                <span>During typhoon season (June-December), monitor PAGASA updates regularly</span>
               </li>
               <li className="flex items-start">
                 <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
-                <span>Prepare an emergency kit with essentials</span>
+                <span>For earthquake safety, practice "Duck, Cover, and Hold" and identify safe spots in your home</span>
               </li>
               <li className="flex items-start">
                 <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
-                <span>Have a family communication plan in case of emergency</span>
+                <span>During monsoon season, avoid low-lying areas prone to flooding</span>
               </li>
               <li className="flex items-start">
                 <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
-                <span>Know the difference between a watch (be prepared) and warning (take action)</span>
+                <span>Keep emergency numbers saved: Philippines Emergency Hotline (911) and Red Cross (143)</span>
               </li>
             </ul>
           </div>
@@ -222,24 +222,24 @@ const SafetyTips = ({ alerts = [] }: SafetyTipsProps) => {
         <div className="p-4 bg-gray-50 rounded-lg">
           <h3 className="font-medium text-lg flex items-center">
             <Cloud className="h-5 w-5 text-gray-500 mr-2" />
-            Weather Preparedness
+            Philippines Emergency Preparedness
           </h3>
           <ul className="mt-2 space-y-2 text-gray-700">
             <li className="flex items-start">
               <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
-              <span>Keep flashlights, batteries, and a weather radio handy</span>
+              <span>Prepare a "Go Bag" with essential documents, medication, water, and non-perishable food</span>
             </li>
             <li className="flex items-start">
               <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
-              <span>Store at least a three-day supply of non-perishable food</span>
+              <span>Know your barangay's evacuation centers and emergency procedures</span>
             </li>
             <li className="flex items-start">
               <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
-              <span>Have one gallon of water per person per day for at least three days</span>
+              <span>Follow the PAGASA color-coded rainfall advisory system (Yellow, Orange, Red)</span>
             </li>
             <li className="flex items-start">
               <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-2" />
-              <span>Charge phones and backup batteries before severe weather</span>
+              <span>Store important contacts and subscribe to NDRRMC disaster alerts (text SUBSCRIBE [LOCATION] to 8888)</span>
             </li>
           </ul>
         </div>

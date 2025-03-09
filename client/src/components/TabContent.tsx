@@ -66,7 +66,20 @@ export function TabContent({
           <HazardsLoadingSkeleton />
         ) : (
           <>
-            <WeatherAlerts alerts={alerts} />
+            {alerts && alerts.length > 0 ? (
+              <WeatherAlerts alerts={alerts} />
+            ) : (
+              <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 mb-6">
+                <div className="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-amber-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <p className="text-sm font-medium text-amber-800">
+                    Weather alerts unavailable. This feature requires access to the OneCall API endpoint.
+                  </p>
+                </div>
+              </div>
+            )}
             {coordinates && <HazardMap lat={coordinates.lat} lon={coordinates.lon} />}
             <SafetyTips alerts={alerts} />
             <PhilippinesNews />
